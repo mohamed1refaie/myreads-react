@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Search from "./Search";
-import BookShelf from "./BookShelf";
+import MyReads from "./MyReads";
 import "./App.css";
 
 class BooksApp extends React.Component {
@@ -13,7 +13,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path="/search" render={() => <Search />} />
-        <Route exact path="/" render={() => <BookShelf />} />
+        <Route exact path="/" render={() => <MyReads />} />
       </div>
     );
   }

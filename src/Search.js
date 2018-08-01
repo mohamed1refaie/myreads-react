@@ -1,8 +1,24 @@
 import React, { Component } from "react";
 import * as BooksAPI from "./BooksAPI";
 import { Link } from "react-router-dom";
-
+import BookShelf from "./BookShelf";
 class Search extends Component {
+  state = {
+    books: []
+  };
+  getAll() {
+    BooksAPI.search("Android").then(books => {
+      this.setState({ books });
+      //console.log(this.state.books);
+    });
+  }
+  componentDidMount() {
+    this.getAll();
+  }
+  update(book, shelf) {
+    BooksAPI.update(book, shelf);
+    this.getAll();
+  }
   render() {
     return (
       <div className="search-books">
@@ -23,6 +39,17 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
+          <div className="list-books-content">
+            <div>
+              <BookShelf
+                update={(book, shelf) => {
+                  this.update(book, shelf);
+                }}
+                title="All"
+                books={this.state.books}
+              />
+            </div>
+          </div>
           <ol className="books-grid" />
         </div>
       </div>
