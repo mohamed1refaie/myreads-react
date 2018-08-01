@@ -30,14 +30,16 @@ class MyReads extends Component {
     });
   }
 
-  updateState(book, shelf) {
+  updateState = (book, shelf) => {
+    let newBooks = this.state.books;
     for (let i = 0; i < this.state.books.length; i++) {
       if (this.state.books[i].id === book.id) {
-        this.state.books[i].shelf = shelf;
+        newBooks[i].shelf = shelf;
         break;
       }
     }
-  }
+    this.setState({ books: newBooks });
+  };
 
   update(book, shelf) {
     BooksAPI.update(book, shelf).then(
